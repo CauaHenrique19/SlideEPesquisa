@@ -4,8 +4,7 @@
 }
 .header{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 10vh;
     background-color: blueviolet;
@@ -15,7 +14,6 @@
     font-weight: 700;
     font-style: normal;
     color: white;
-    margin-left: 230px;
 }
 .container{
     height: 90vh;
