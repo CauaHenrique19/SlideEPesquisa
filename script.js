@@ -21,8 +21,8 @@ function renderProducts(products) {
 function renderSlideCircle() {
     for (let i = 1; i <= maxViewNumber; i++){
         document.querySelector('.circles').innerHTML += 
-            i === 1 ? `<div class="circle selected" data-linha="${i}"></div>` : 
-        `<div class="circle" data-linha="${i}"></div>`
+            i === 1 ? `<div class="circle selected" viewNumber="${i}"></div>` : 
+        `<div class="circle" viewNumber="${i}"></div>`
     }
 }
 
@@ -69,7 +69,7 @@ function setVisibleButtons() {
 function setClassCircle() {
     document.querySelectorAll('.circle').forEach(circle => circle.classList.remove('selected'))
 
-    const circle = document.querySelector(`[data-linha="${viewNumber}"]`)
+    const circle = document.querySelector(`[viewNumber="${viewNumber}"]`)
     circle.classList.add('selected')
 }
 

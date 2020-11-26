@@ -17,17 +17,6 @@
     color: white;
     margin-left: 230px;
 }
-.header a{
-    text-decoration: none;
-    color: white;
-    font-family: montserrat, sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    font-size: 1.2rem;
-    background-color: rgba(0, 0, 0, 0.219);
-    padding: 10px 20px;
-    border-radius: 50px;
-}
 .container{
     height: 90vh;
     display: flex;
@@ -40,12 +29,9 @@
     height: 50px;
     margin-bottom: 50px;
     background-color: white;
-    box-shadow: 0px 0px 20px 0px rgba(151, 151, 151, 0.274);
+    box-shadow: 0 0 16px 0 rgba(137, 43, 226, 0.116);
     border-radius: 50px;
     padding: 0px 25px 0px 0px;
-}
-.input-container i{
-    color: blueviolet;
 }
 .input-container input{
     width: 350px;
@@ -59,14 +45,18 @@
     font-size: 1.2rem;
     border-radius: 50px;
 }
+.input-container i{
+    color: blueviolet;
+}
 .offers{
     display: flex;
     flex-direction: column;
     position: relative;
+    height: 400px;
 }
 .slider-container{
     width: 1395px;
-    height: 380px;
+    height: 385px;
     overflow: hidden;
     position: relative;
 }
@@ -74,21 +64,26 @@
     width: fit-content;
     display: grid;
     grid-gap: 15px;
+    height: 355px;
     transition: transform 0.5s;
 }
-.offers button{
+button{
     width: 50px;
     height: 50px;
     background-color: white;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16);
+    box-shadow: 0 0 10px 0 rgba(137, 43, 226, 0.315);
     border-radius: 50px;
     border: none;
-    color: rgb(12, 171, 252);
+    color: blueviolet;
     font-size: 1.5rem;
     cursor: pointer;
     outline: none;
     position: absolute;
     top: 40%;
+    transition: all 0.2s;
+}
+button:hover{
+    transform: scale(1.10);
 }
 .btn-previous{
     left: -25px;
