@@ -1,7 +1,11 @@
-const slider = document.querySelector('.slider')
+const sliderContainer = document.querySelector('.slider')
 
-function gerarProdutos(obj) {
-    slider.innerHTML = obj.map((produto) =>
+let viewNumber = 1
+var translateValue = -1410
+const maxViewNumber = Math.ceil(products.length / 6)
+
+function renderProducts(products) {
+    sliderContainer.innerHTML = products.map(produto =>
         `<div class="oferta">
             <div class="oferta-img">
                 <img src="${produto.imagemUrl}" alt="">
@@ -13,68 +17,64 @@ function gerarProdutos(obj) {
             </div>
         </div>`).join('')
 }
-gerarProdutos(produtos)
-
-const input = document.querySelector('.input-pesquisa')
-
-input.addEventListener('keyup', e => {
-    var pesquisa = e.target.value
-    var produtosCorrespondentes = produtos.filter((produto) => produto.nome.toLowerCase().includes(pesquisa))
-    gerarProdutos(produtosCorrespondentes)
-})
-
-const divs = document.querySelectorAll('.oferta')
-
-const btnProx = document.querySelector('.prox')
-const btnAntes = document.querySelector('.antes')
-
-let linha = 1
-var valorTranslate = -1410
-const maxLinha = Math.ceil(produtos.length / 6)
-
-slider.style.gridTemplateColumns = `repeat(${divs.length}, 1fr)`
-renderSlideCircle()
-
-function next() {
-    valorTranslate == 0 ? valorTranslate = -1410 : ''
-    valorTranslate = -1410 * linha
-
-    slider.style.transform = `translate3d(${valorTranslate}px, 0, 0)`
-
-    linha++
-    marcarCirculosSlides()
-    setVisibleButtons()
-}
-
-function back(){
-    valorTranslate == 0 ? valorTranslate = -1410 : valorTranslate -= -1410
-    slider.style.transform = `translate3d(${valorTranslate}px, 0, 0)`
-
-    linha--
-    marcarCirculosSlides()
-    setVisibleButtons()
-}
-
-btnProx.addEventListener('click', next)
-btnAntes.addEventListener('click', back)
-
-function setVisibleButtons() {
-    linha == maxLinha ? btnProx.style.visibility = 'hidden' : btnProx.style.visibility = 'visible'
-    linha > 1 ? btnAntes.style.visibility = 'visible' : btnAntes.style.visibility = 'hidden'
-}
 
 function renderSlideCircle() {
-    const localCirculos = document.querySelector('.circulos')
-    for (let i = 1; i <= maxLinha; i++){
-        localCirculos.innerHTML += i === 1 ? `<div class="circulo neste" data-linha="${i}"></div>` : `<div class="circulo" data-linha="${i}"></div>`
+    for (let i = 1; i <= maxViewNumber; i++){
+        document.querySelector('.circulos').innerHTML += 
+            i === 1 ? `<div class="circulo neste" data-linha="${i}"></div>` : 
+        `<div class="circulo" data-linha="${i}"></div>`
     }
 }
 
-function marcarCirculosSlides() {
-    document.querySelectorAll('.circulo').forEach((circulo) => circulo.classList.remove('neste'))
+renderProducts(products)
+renderSlideCircle()
 
-    const circulo = document.querySelector(`[data-linha="${linha}"]`)
-    circulo.classList.add('neste')
+function search(e){
+    var searchValue = e.target.value
+    var searchProducts = products.filter(produto => produto.nome.toLowerCase().includes(searchValue))
+    renderProducts(searchProducts)
 }
+
+const btnNext = document.querySelector('.prox')
+const btnPrevious = document.querySelector('.antes')
+
+const offersTags = document.querySelectorAll('.oferta')
+sliderContainer.style.gridTemplateColumns = `repeat(${offersTags.length}, 1fr)`
+
+function nextView() {
+    translateValue == 0 ? translateValue = -1410 : ''
+    translateValue = -1410 * viewNumber
+
+    sliderContainer.style.transform = `translate3d(${translateValue}px, 0, 0)`
+
+    viewNumber++
+    setClassCircle()
+    setVisibleButtons()
+}
+
+function backView(){
+    translateValue == 0 ? translateValue = -1410 : translateValue -= -1410
+    sliderContainer.style.transform = `translate3d(${translateValue}px, 0, 0)`
+
+    viewNumber--
+    setClassCircle()
+    setVisibleButtons()
+}
+
+function setVisibleButtons() {
+    viewNumber == maxViewNumber ? btnNext.style.visibility = 'hidden' : btnNext.style.visibility = 'visible'
+    viewNumber > 1 ? btnPrevious.style.visibility = 'visible' : btnPrevious.style.visibility = 'hidden'
+}
+
+function setClassCircle() {
+    document.querySelectorAll('.circulo').forEach(circle => circle.classList.remove('neste'))
+
+    const circle = document.querySelector(`[data-linha="${viewNumber}"]`)
+    circle.classList.add('neste')
+}
+
+btnNext.addEventListener('click', nextView)
+btnPrevious.addEventListener('click', backView)
+document.querySelector('.input-pesquisa').addEventListener('keyup', search)
 
 

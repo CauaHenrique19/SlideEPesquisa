@@ -181,7 +181,7 @@ body{
 .neste{
     background-color: blue;
     transition: transform 0.2s;
-    transform: scale(1.25);
+    transform: scale(1.10);
 }
 .botoes-slide button{
     width: 50px;

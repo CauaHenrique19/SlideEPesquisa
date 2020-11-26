@@ -1,4 +1,4 @@
-let produtos = [
+let products = [
     {
         nome: "Pão de Forma Plus Vita Tradicional 500g",
         descricao: 'pra comer',
